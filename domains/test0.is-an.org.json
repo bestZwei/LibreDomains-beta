@@ -1,0 +1,8 @@
+{
+    "type": "A",
+    "name": "test0",
+    "content": "192.0.2.1",
+    "ttl": 120,
+    "proxied": false,
+    "email": "contact@example.com"
+  }
