@@ -1,0 +1,7 @@
+{
+  "domain": "abc.is-an.org",
+  "type": "CNAME",
+  "content": "comi-xf.github.io",
+  "ttl": 600,
+  "proxied": false
+}
