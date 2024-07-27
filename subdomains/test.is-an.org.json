@@ -1,0 +1,7 @@
+{
+  "domain": "test.is-an.org",
+  "type": "A",
+  "content": "192.0.2.2",
+  "ttl": 120,
+  "proxied": false
+}
