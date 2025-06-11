@@ -25,7 +25,7 @@ class CloudflareTokenValidator {
     }
 
     try {
-      // Test token by getting user details
+      // Test token by getting user details - use correct endpoint
       const response = await axios.get(`${this.baseURL}/user/tokens/verify`, {
         headers: {
           'Authorization': `Bearer ${this.token}`,

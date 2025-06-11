@@ -13,9 +13,9 @@ class CloudflareAPI {
       throw new Error('CLOUDFLARE_API_TOKEN environment variable is required. Please set it in your environment or GitHub secrets.');
     }
 
-    // Validate token format
-    if (!this.apiToken.match(/^[A-Za-z0-9_-]{40}$/)) {
-      throw new Error('Invalid Cloudflare API token format. Token should be 40 characters long.');
+    // Validate token format - allow longer tokens as well
+    if (!this.apiToken.match(/^[A-Za-z0-9_-]{32,}$/)) {
+      throw new Error('Invalid Cloudflare API token format. Token should be at least 32 characters long.');
     }
   }
 
