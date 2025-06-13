@@ -1,0 +1,16 @@
+{
+  "owner": {
+    "name": "mc838",
+    "github": "vipmc838",
+    "email": "vipmc838@hotmail.com"
+  },
+  "records": [
+    {
+      "type": "CNAME",
+      "name": "@",
+      "content": "alist-b1p.pages.dev",
+      "ttl": 3600,
+      "proxied": true
+    }
+  ]
+}
