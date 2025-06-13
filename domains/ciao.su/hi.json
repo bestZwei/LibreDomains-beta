@@ -1,0 +1,16 @@
+{
+  "owner": {
+    "name": "Bian",
+    "github": "Biiian",
+    "email": "cranny-graven-7m@icloud.com"
+  },
+  "records": [
+    {
+      "type": "CNAME",
+      "name": "@",
+      "content": "Biiian.github.io",
+      "ttl": 3600,
+      "proxied": true
+    }
+  ]
+}
