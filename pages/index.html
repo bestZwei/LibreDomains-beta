@@ -90,6 +90,44 @@
                         <p>备用域名，暂时不开放申请</p>
                     </div>
                 </div>
+
+                <!-- 新增：子域名检测功能 -->
+                <div class="subdomain-checker">
+                    <h3>🔍 检测子域名可用性</h3>
+                    <p>输入你想要的子域名，我们会检测是否可以申请</p>
+                    
+                    <div class="checker-form">
+                        <div class="input-group">
+                            <input type="text" id="subdomainInput" placeholder="输入子域名" maxlength="63">
+                            <span class="domain-suffix">.ciao.su</span>
+                            <button id="checkButton" class="btn btn-primary">检测</button>
+                        </div>
+                        
+                        <div class="checker-result" id="checkerResult">
+                            <div class="result-icon"></div>
+                            <div class="result-text"></div>
+                            <div class="result-details"></div>
+                        </div>
+                        
+                        <div class="checker-stats">
+                            <div class="stat-item">
+                                <span class="stat-number" id="totalDomains">-</span>
+                                <span class="stat-label">已注册域名</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="availableDomains">∞</span>
+                                <span class="stat-label">可申请域名</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-domains">
+                        <h4>最近注册的域名</h4>
+                        <div class="domains-list" id="recentDomainsList">
+                            <div class="loading">正在加载...</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 

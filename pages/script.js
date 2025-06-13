@@ -314,7 +314,360 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
         progressBar.style.width = scrolled + '%';
     });
+
+    // 子域名检测功能
+    initSubdomainChecker();
 });
+
+// 子域名检测功能
+function initSubdomainChecker() {
+    const subdomainInput = document.getElementById('subdomainInput');
+    const checkButton = document.getElementById('checkButton');
+    const checkerResult = document.getElementById('checkerResult');
+    const totalDomainsSpan = document.getElementById('totalDomains');
+    const recentDomainsList = document.getElementById('recentDomainsList');
+    
+    let registeredDomains = new Set();
+    let reservedSubdomains = new Set([
+        '@', 'www', 'mail', 'email', 'webmail', 'ns', 'dns',
+        'api', 'cdn', 'ftp', 'sftp', 'admin', 'panel', 
+        'dashboard', 'control', 'dev', 'test', 'staging', 
+        'demo', 'blog', 'forum', 'wiki', 'docs', 'tv',
+        'app', 'mobile', 'static', 'assets'
+    ]);
+
+    // 检查是否支持必要的 API
+    if (!window.fetch) {
+        console.warn('Fetch API not supported, subdomain checker will be limited');
+        recentDomainsList.innerHTML = `
+            <div class="error-message">
+                您的浏览器不支持此功能，请使用现代浏览器
+            </div>
+        `;
+        return;
+    }
+
+    // 加载已注册的域名数据
+    loadRegisteredDomains();
+
+    // 输入验证
+    subdomainInput.addEventListener('input', function() {
+        const value = this.value.toLowerCase();
+        const isValid = validateSubdomain(value);
+        const inputGroup = this.parentElement;
+        const validationHint = inputGroup.nextElementSibling;
+
+        if (value === '') {
+            inputGroup.classList.remove('invalid');
+            if (validationHint && validationHint.classList.contains('validation-hint')) {
+                validationHint.remove();
+            }
+            return;
+        }
+
+        if (isValid) {
+            inputGroup.classList.remove('invalid');
+            if (validationHint && validationHint.classList.contains('validation-hint')) {
+                validationHint.remove();
+            }
+        } else {
+            inputGroup.classList.add('invalid');
+            if (!validationHint || !validationHint.classList.contains('validation-hint')) {
+                const hint = document.createElement('div');
+                hint.className = 'validation-hint error';
+                hint.textContent = getValidationMessage(value);
+                inputGroup.parentElement.insertBefore(hint, inputGroup.nextSibling);
+            }
+        }
+
+        checkButton.disabled = !isValid || value === '';
+    });
+
+    // 回车键检测
+    subdomainInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !checkButton.disabled) {
+            e.preventDefault();
+            checkSubdomain();
+        }
+    });
+
+    // 检测按钮点击
+    checkButton.addEventListener('click', checkSubdomain);
+
+    // 验证子域名格式
+    function validateSubdomain(subdomain) {
+        if (!subdomain) return false;
+        if (subdomain.length < 2 || subdomain.length > 63) return false;
+        if (subdomain.startsWith('-') || subdomain.endsWith('-')) return false;
+        if (!/^[a-z0-9-]+$/.test(subdomain)) return false;
+        return true;
+    }
+
+    // 获取验证错误信息
+    function getValidationMessage(subdomain) {
+        if (subdomain.length < 2) return '子域名长度至少2个字符';
+        if (subdomain.length > 63) return '子域名长度不能超过63个字符';
+        if (subdomain.startsWith('-') || subdomain.endsWith('-')) return '子域名不能以连字符开头或结尾';
+        if (!/^[a-z0-9-]+$/.test(subdomain)) return '只能包含小写字母、数字和连字符';
+        return '无效的子域名格式';
+    }
+
+    // 检测子域名可用性
+    async function checkSubdomain() {
+        const subdomain = subdomainInput.value.toLowerCase().trim();
+        if (!validateSubdomain(subdomain)) return;
+
+        // 显示加载状态
+        checkButton.disabled = true;
+        checkButton.classList.add('loading');
+        checkButton.textContent = '';
+        
+        try {
+            // 检查是否为保留域名
+            if (reservedSubdomains.has(subdomain)) {
+                showResult('unavailable', '域名不可用', `"${subdomain}" 是系统保留域名，无法申请`, '保留域名');
+                return;
+            }
+
+            // 检查是否已被注册
+            if (registeredDomains.has(subdomain)) {
+                showResult('unavailable', '域名不可用', `"${subdomain}" 已被其他用户注册`, '已注册');
+                return;
+            }
+
+            // 域名可用
+            showResult('available', '域名可用！', `"${subdomain}.ciao.su" 可以申请`, '');
+
+        } catch (error) {
+            console.error('检测失败:', error);
+            showResult('error', '检测失败', '检测过程中出现错误，但域名可能仍然可用', '请手动确认');
+        } finally {
+            // 恢复按钮状态
+            setTimeout(() => {
+                checkButton.disabled = false;
+                checkButton.classList.remove('loading');
+                checkButton.textContent = '检测';
+            }, 500);
+        }
+    }
+
+    // 显示检测结果
+    function showResult(type, title, message, details) {
+        const resultIcon = checkerResult.querySelector('.result-icon');
+        const resultText = checkerResult.querySelector('.result-text');
+        const resultDetails = checkerResult.querySelector('.result-details');
+
+        // 设置图标
+        const icons = {
+            available: '✅',
+            unavailable: '❌',
+            error: '⚠️'
+        };
+        resultIcon.textContent = icons[type];
+
+        // 设置文本
+        resultText.innerHTML = `
+            <h4>${title}</h4>
+            <p>${message}</p>
+        `;
+
+        // 设置详情
+        resultDetails.innerHTML = details || '';
+
+        // 设置样式类
+        checkerResult.className = `checker-result show ${type}`;
+
+        // 滚动到结果位置
+        setTimeout(() => {
+            checkerResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+
+    // 加载已注册的域名数据
+    async function loadRegisteredDomains() {
+        try {
+            // 显示加载状态
+            recentDomainsList.innerHTML = '<div class="loading">正在加载域名数据...</div>';
+            
+            // 使用更稳定的 GitHub API 调用方式
+            const apiUrl = 'https://api.github.com/repos/bestzwei/LibreDomains/contents/domains/ciao.su';
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/vnd.github.v3+json',
+                    'User-Agent': 'LibreDomains-Checker/1.0'
+                },
+                cache: 'no-cache'
+            });
+            
+            if (!response.ok) {
+                // 如果 API 调用失败，使用备用方案
+                console.warn(`GitHub API failed with status: ${response.status}`);
+                await loadDomainsFromBackup();
+                return;
+            }
+            
+            const files = await response.json();
+            
+            // 验证响应格式
+            if (!Array.isArray(files)) {
+                throw new Error('Invalid API response format');
+            }
+            
+            const domainFiles = files.filter(file => 
+                file.name && 
+                file.name.endsWith('.json') && 
+                file.name !== 'example.json' &&
+                file.type === 'file'
+            );
+
+            // 提取域名列表
+            registeredDomains.clear();
+            const recentDomains = [];
+
+            domainFiles.forEach(file => {
+                const domainName = file.name.replace('.json', '');
+                if (domainName && /^[a-z0-9-]+$/.test(domainName)) {
+                    registeredDomains.add(domainName);
+                    recentDomains.push({
+                        name: domainName,
+                        url: file.html_url || '#',
+                        size: file.size || 0
+                    });
+                }
+            });
+
+            // 按名称排序
+            recentDomains.sort((a, b) => a.name.localeCompare(b.name));
+
+            // 更新统计信息
+            if (totalDomainsSpan) {
+                totalDomainsSpan.textContent = registeredDomains.size;
+            }
+
+            // 显示最近注册的域名（最多显示12个）
+            displayRecentDomains(recentDomains.slice(0, 12));
+
+        } catch (error) {
+            console.error('加载域名数据失败:', error);
+            await loadDomainsFromBackup();
+        }
+    }
+
+    // 备用数据加载方案
+    async function loadDomainsFromBackup() {
+        try {
+            // 使用已知的域名作为备用数据
+            const knownDomains = ['cc', 'example']; // 从你提供的文件中已知的域名
+            
+            registeredDomains.clear();
+            knownDomains.forEach(domain => {
+                if (domain !== 'example') { // 排除示例文件
+                    registeredDomains.add(domain);
+                }
+            });
+
+            if (totalDomainsSpan) {
+                totalDomainsSpan.textContent = registeredDomains.size;
+            }
+
+            const backupDomains = Array.from(registeredDomains).map(name => ({
+                name,
+                url: '#',
+                size: 0
+            }));
+
+            displayRecentDomains(backupDomains);
+
+            // 显示提示信息
+            if (recentDomainsList.children.length === 0) {
+                recentDomainsList.innerHTML = `
+                    <div class="error-message">
+                        无法连接到 GitHub API，显示的是缓存数据。
+                        <br>完整数据请访问 
+                        <a href="https://github.com/bestzwei/LibreDomains/tree/main/domains/ciao.su" 
+                           target="_blank" style="color: var(--primary-color);">GitHub 仓库</a>
+                    </div>
+                `;
+            }
+
+        } catch (backupError) {
+            console.error('备用数据加载也失败:', backupError);
+            if (recentDomainsList) {
+                recentDomainsList.innerHTML = `
+                    <div class="error-message">
+                        数据加载失败，请检查网络连接或稍后重试
+                        <br><a href="https://github.com/bestzwei/LibreDomains/tree/main/domains/ciao.su" 
+                               target="_blank" style="color: var(--primary-color);">查看完整域名列表</a>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    // 显示最近注册的域名 - 改进版本
+    function displayRecentDomains(domains) {
+        if (!recentDomainsList) return;
+
+        if (domains.length === 0) {
+            recentDomainsList.innerHTML = '<div class="loading">暂无注册域名</div>';
+            return;
+        }
+
+        const domainsHtml = domains.map(domain => `
+            <div class="domain-item" data-domain="${domain.name}">
+                <span class="domain-name">${domain.name}</span>
+                <div class="domain-status" title="已注册"></div>
+            </div>
+        `).join('');
+
+        recentDomainsList.innerHTML = domainsHtml;
+
+        // 添加点击效果 - 改进版本
+        const domainItems = recentDomainsList.querySelectorAll('.domain-item');
+        domainItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const domainName = this.getAttribute('data-domain') || 
+                                  this.querySelector('.domain-name')?.textContent;
+                
+                if (domainName && subdomainInput) {
+                    subdomainInput.value = domainName;
+                    subdomainInput.focus();
+                    
+                    // 添加视觉反馈
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                    
+                    // 自动触发检测
+                    setTimeout(() => {
+                        if (checkButton && !checkButton.disabled) {
+                            checkSubdomain();
+                        }
+                    }, 200);
+                }
+            });
+        });
+    }
+
+    // 减少自动刷新频率以避免API限制
+    setInterval(loadRegisteredDomains, 10 * 60 * 1000); // 改为10分钟
+}
+
+// 禁用 Cloudflare RUM 相关错误
+window.addEventListener('error', function(e) {
+    // 忽略 Cloudflare RUM 相关错误
+    if (e.message && e.message.includes('cdn-cgi/rum')) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// 禁用 Cloudflare Web Analytics 如果不需要
+if (typeof window.cloudflareAnalytics !== 'undefined') {
+    window.cloudflareAnalytics = null;
+}
 
 // Add additional CSS animations
 const additionalStyles = document.createElement('style');

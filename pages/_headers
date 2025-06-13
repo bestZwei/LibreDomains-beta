@@ -4,16 +4,35 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
-  Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'
+  Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://api.github.com; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.github.com https://static.cloudflareinsights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Cross-Origin-Embedder-Policy: unsafe-none
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization
+
+# 禁用 Cloudflare Web Analytics RUM 收集
+/cdn-cgi/rum
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache, no-store, must-revalidate
 
 /*.html
   Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
 
 /*.css
   Cache-Control: public, max-age=31536000
+  X-Content-Type-Options: nosniff
 
 /*.js
   Cache-Control: public, max-age=31536000
+  X-Content-Type-Options: nosniff
 
 /*.ico
   Cache-Control: public, max-age=31536000
+
+# API 响应头
+/api/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Cache-Control: public, max-age=300

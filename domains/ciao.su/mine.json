@@ -1,0 +1,23 @@
+{
+  "owner": {
+    "name": "神乐",
+    "github": "orangelightyo",
+    "email": "sekese@163.com"
+  },
+  "records": [
+    {
+      "type": "A",
+      "name": "@",
+      "content": "185.199.108.153",
+      "ttl": 3600,
+      "proxied": true
+    },
+    {
+      "type": "CNAME",
+      "name": "www",
+      "content": "orangelightyo.github.io",
+      "ttl": 3600,
+      "proxied": true
+    }
+  ]
+}

@@ -7,7 +7,7 @@
   "records": [
     {
       "type": "CNAME",
-      "name": "cug",
+      "name": "@",
       "content": "it-tools-260.pages.dev",
       "ttl": 3600,
       "proxied": true
