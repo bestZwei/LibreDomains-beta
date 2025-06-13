@@ -1,0 +1,16 @@
+{
+  "owner": {
+    "name": "oyz",
+    "github": "boosoyz",
+    "email": "boosoyz@gmail.com"
+  },
+  "records": [
+    {
+      "type": "CNAME",
+      "name": "www",
+      "content": "koyeb-16u.pages.dev",
+      "ttl": 3600,
+      "proxied": true
+    }
+  ]
+}
