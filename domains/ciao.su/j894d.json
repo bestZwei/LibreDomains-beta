@@ -8,14 +8,14 @@
     {
       "type": "A",
       "name": "@",
-      "content": "185.199.108.153",
+      "content": "162.159.160.26",
       "ttl": 3600,
       "proxied": false
     },
     {
       "type": "CNAME",
       "name": "www",
-      "content": "hofccyf.github.io",
+      "content": "cm-p-t.pages.dev",
       "ttl": 3600,
       "proxied": false
     }
