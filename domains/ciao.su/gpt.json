@@ -1,0 +1,16 @@
+{
+  "owner": {
+    "name": "JUJU",
+    "github": "justn-gpt",
+    "email": "gjustn@gmail.com"
+  },
+  "records": [
+    {
+  "type": "CNAME",
+  "name": "kan",
+  "content": "sokg.pages.dev",
+  "ttl": 3600,
+  "proxied": false
+    }
+  ]
+}

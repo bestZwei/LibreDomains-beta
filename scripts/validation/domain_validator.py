@@ -287,9 +287,39 @@ def validate_pull_request(pr_files: List[str], config: Optional[Dict[str, Any]] 
         # 获取原始文件路径用于显示
         display_path = file_path
         
-        # 检查文件是否存在
+        # 1. 检查文件路径格式是否正确
+        path_errors = validate_file_path_format(file_path)
+        if path_errors:
+            results[display_path] = path_errors
+            all_valid = False
+            continue
+        
+        # 2. 检查文件是否存在
         if not os.path.exists(file_path):
             results[display_path] = [f"文件不存在: {file_path}"]
+            all_valid = False
+            continue
+        
+        # 3. 检查文件是否为空
+        try:
+            file_size = os.path.getsize(file_path)
+            if file_size == 0:
+                results[display_path] = ["文件为空，请添加有效的 JSON 配置"]
+                all_valid = False
+                continue
+            elif file_size > 10 * 1024:  # 10KB 限制
+                results[display_path] = [f"文件过大 ({file_size} 字节)，域名配置文件应小于 10KB"]
+                all_valid = False
+                continue
+        except Exception as e:
+            results[display_path] = [f"无法读取文件信息: {str(e)}"]
+            all_valid = False
+            continue
+        
+        # 4. 预检查文件内容是否为有效 JSON
+        json_valid, json_error = validate_json_format(file_path)
+        if not json_valid:
+            results[display_path] = [json_error]
             all_valid = False
             continue
         
@@ -352,7 +382,7 @@ def validate_pull_request(pr_files: List[str], config: Optional[Dict[str, Any]] 
         
         # 检查文件名是否符合规则
         if not filename.endswith('.json'):
-            results[display_path] = ["文件必须是 JSON 格式"]
+            results[display_path] = ["文件必须是 JSON 格式 (.json 扩展名)"]
             all_valid = False
             continue
         
@@ -390,6 +420,121 @@ def validate_pull_request(pr_files: List[str], config: Optional[Dict[str, Any]] 
             results[display_path] = []
     
     return all_valid, results
+
+
+def validate_file_path_format(file_path: str) -> List[str]:
+    """
+    验证文件路径格式
+    
+    Args:
+        file_path: 文件路径
+    
+    Returns:
+        错误信息列表，如果为空则表示路径格式正确
+    """
+    errors = []
+    
+    # 规范化路径
+    normalized_path = file_path.replace('\\', '/')
+    
+    # 1. 检查是否在 domains 目录下
+    if '/domains/' not in normalized_path:
+        errors.append("文件必须位于 domains/ 目录下")
+        return errors
+    
+    # 2. 提取路径部分
+    try:
+        path_after_domains = normalized_path.split('/domains/')[1]
+        path_parts = path_after_domains.split('/')
+        
+        if len(path_parts) != 2:
+            errors.append("文件路径格式错误，应为: domains/{domain}/{subdomain}.json")
+            return errors
+        
+        domain_name, filename = path_parts
+        
+        # 3. 检查域名部分
+        if not domain_name:
+            errors.append("域名部分不能为空")
+        elif not domain_name.replace('.', '').replace('-', '').isalnum():
+            errors.append(f"域名 '{domain_name}' 包含无效字符")
+        
+        # 4. 检查文件名
+        if not filename:
+            errors.append("文件名不能为空")
+        elif not filename.endswith('.json'):
+            errors.append("文件必须是 JSON 格式 (.json 扩展名)")
+        elif filename == '.json':
+            errors.append("文件名不能仅为 .json")
+        else:
+            # 检查子域名部分
+            subdomain = filename[:-5]  # 去除 .json 后缀
+            if not subdomain:
+                errors.append("子域名不能为空")
+            elif len(subdomain) < 3:
+                errors.append("子域名长度至少为 3 个字符")
+            elif len(subdomain) > 63:
+                errors.append("子域名长度不能超过 63 个字符")
+            elif not subdomain.replace('-', '').isalnum():
+                errors.append(f"子域名 '{subdomain}' 只能包含字母、数字和连字符")
+            elif subdomain.startswith('-') or subdomain.endswith('-'):
+                errors.append(f"子域名 '{subdomain}' 不能以连字符开头或结尾")
+    
+    except Exception as e:
+        errors.append(f"解析文件路径时出错: {str(e)}")
+    
+    return errors
+
+
+def validate_json_format(file_path: str) -> Tuple[bool, str]:
+    """
+    验证文件是否为有效的 JSON 格式
+    
+    Args:
+        file_path: 文件路径
+    
+    Returns:
+        (是否有效, 错误信息)
+    """
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read().strip()
+        
+        # 检查文件是否为空
+        if not content:
+            return False, "文件内容为空，请添加有效的 JSON 配置"
+        
+        # 检查是否以 { 开头和 } 结尾
+        if not (content.startswith('{') and content.endswith('}')):
+            return False, "JSON 文件必须以 { 开头，以 } 结尾"
+        
+        # 尝试解析 JSON
+        json.loads(content)
+        return True, ""
+        
+    except json.JSONDecodeError as e:
+        error_msg = f"JSON 格式错误: {str(e)}"
+        if hasattr(e, 'lineno') and hasattr(e, 'colno'):
+            error_msg += f" (第 {e.lineno} 行，第 {e.colno} 列)"
+        
+        # 提供常见错误的修复建议
+        if "Expecting ',' delimiter" in str(e):
+            error_msg += "\n💡 提示: 可能缺少逗号分隔符，请检查 JSON 对象中的字段是否用逗号正确分隔"
+        elif "Expecting ':' delimiter" in str(e):
+            error_msg += "\n💡 提示: 可能缺少冒号，请检查键值对格式是否正确"
+        elif "Expecting value" in str(e):
+            error_msg += "\n💡 提示: 可能有多余的逗号或缺少值"
+        elif "Unterminated string" in str(e):
+            error_msg += "\n💡 提示: 字符串未正确闭合，请检查引号是否匹配"
+        elif "Expecting property name" in str(e):
+            error_msg += "\n💡 提示: 属性名必须用双引号包围"
+        
+        return False, error_msg
+        
+    except UnicodeDecodeError:
+        return False, "文件编码错误，请使用 UTF-8 编码保存文件"
+    except Exception as e:
+        return False, f"读取文件时出错: {str(e)}"
 
 
 def main():

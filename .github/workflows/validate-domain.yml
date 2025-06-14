@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
-      - 'domains/**/*.json'
+      - 'domains/**/*'  # 监控 domains 目录下的所有文件变化
 
 jobs:
   validate-domain:
@@ -32,16 +32,78 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v42
         with:
-          files: 'domains/**/*.json'
+          files: 'domains/**/*'
           separator: ' '
+      
+      - name: 预检查文件格式
+        if: steps.changed-files.outputs.all_changed_files != ''
+        run: |
+          echo "=== 预检查文件格式 ==="
+          echo "更改的文件: ${{ steps.changed-files.outputs.all_changed_files }}"
+          echo ""
+          
+          HAS_INVALID_FILES=false
+          
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "检查文件: $file"
+            
+            # 检查文件是否在正确的目录结构中
+            if [[ ! "$file" =~ ^domains/[^/]+/[^/]+\.json$ ]]; then
+              echo "❌ 错误: 文件路径格式不正确"
+              echo "   期望格式: domains/{域名}/{子域名}.json"
+              echo "   实际路径: $file"
+              HAS_INVALID_FILES=true
+              continue
+            fi
+            
+            # 检查文件是否存在
+            if [[ ! -f "$file" ]]; then
+              echo "❌ 错误: 文件不存在"
+              HAS_INVALID_FILES=true
+              continue
+            fi
+            
+            # 检查文件是否为空
+            if [[ ! -s "$file" ]]; then
+              echo "❌ 错误: 文件为空"
+              HAS_INVALID_FILES=true
+              continue
+            fi
+            
+            # 基本 JSON 格式检查
+            if ! python -m json.tool "$file" > /dev/null 2>&1; then
+              echo "❌ 错误: JSON 格式无效"
+              echo "   请使用 https://jsonlint.com/ 验证 JSON 格式"
+              HAS_INVALID_FILES=true
+              continue
+            fi
+            
+            echo "✅ 基本格式检查通过"
+          done
+          
+          if [ "$HAS_INVALID_FILES" = true ]; then
+            echo ""
+            echo "❌ 预检查发现文件格式问题，请修复后重新提交"
+            echo ""
+            echo "💡 常见问题和解决方法:"
+            echo "1. 文件必须放在 domains/{域名}/ 目录下"
+            echo "2. 文件名必须以 .json 结尾"
+            echo "3. 文件内容必须是有效的 JSON 格式"
+            echo "4. 可以参考 domains/ciao.su/example.json 作为模板"
+            exit 1
+          fi
       
       - name: 验证域名配置
         if: steps.changed-files.outputs.all_changed_files != ''
         run: |
+          # 设置 Python 路径以便正确导入模块
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          
           echo "=== 开始验证域名配置 ==="
           echo "更改的文件: ${{ steps.changed-files.outputs.all_changed_files }}"
           echo "PR作者: ${{ github.event.pull_request.user.login }}"
           echo "检查保留子域名: 启用"
+          echo "检查文件格式: 启用"
           echo ""
           
           # 运行验证脚本并直接输出到控制台，包含所有权验证和保留子域名检查
@@ -57,10 +119,16 @@ jobs:
           else
             echo ""
             echo "❌ 域名配置验证失败，请查看上方的详细错误信息。"
+            echo ""
+            echo "💡 修复建议:"
+            echo "1. 仔细阅读错误信息中的具体问题"
+            echo "2. 参考 domains/ciao.su/example.json 模板"
+            echo "3. 使用 https://jsonlint.com/ 验证 JSON 格式"
+            echo "4. 查看用户指南: https://github.com/bestzwei/LibreDomains/blob/main/docs/user-guide.md"
             exit 1
           fi
       
       - name: 无文件更改
         if: steps.changed-files.outputs.all_changed_files == ''
         run: |
-          echo "ℹ️ 没有检测到域名配置文件的更改。"
+          echo "ℹ️ 没有检测到 domains 目录下的文件更改。"

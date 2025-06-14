@@ -1,0 +1,16 @@
+{
+  "owner": {
+    "name": "tsengvee",
+    "github": "tsengvee",
+    "email": "tsengvee@gmail.com"
+  },
+  "records": [
+    {
+      "type": "CNAME",
+      "name": "@",
+      "content": "2784b4c190d9b763.vercel-dns-017.com",
+      "ttl": 3600,
+      "proxied": false
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "owner": {
+    "name": "hofccyf",
+    "github": "hofccyf",
+    "email": "hofccyf@outlook.com"
+  },
+  "records": [
+    {
+      "type": "A",
+      "name": "@",
+      "content": "185.199.108.153",
+      "ttl": 3600,
+      "proxied": false
+    },
+    {
+      "type": "CNAME",
+      "name": "www",
+      "content": "hofccyf.github.io",
+      "ttl": 3600,
+      "proxied": false
+    }
+  ]
+}

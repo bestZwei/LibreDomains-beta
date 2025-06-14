@@ -26,6 +26,12 @@ jobs:
         
       - name: 生成统计报告
         run: |
+          # 设置 Python 路径以便正确导入模块
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          
+          # 确保 docs 目录存在
+          mkdir -p docs
+          
           python scripts/stats/domain_stats.py --output docs/stats_report.md --json docs/stats.json
           
       - name: 更新统计报告
