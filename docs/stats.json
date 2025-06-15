@@ -1,0 +1,588 @@
+{
+  "total_domains": 2,
+  "enabled_domains": 2,
+  "total_subdomains": 19,
+  "subdomains_by_domain": {
+    "ciao.su": 19,
+    "ciallo.de": 0
+  },
+  "users": {
+    "Neomanbeta": {
+      "name": "William Wu",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "neo",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        }
+      ]
+    },
+    "dsblkkk": {
+      "name": "tmw",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "0-0",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    "boosoyz": {
+      "name": "oyz",
+      "count": 3,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "oo",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "xx",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "nezha",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        }
+      ]
+    },
+    "heyueshisan": {
+      "name": "Marjorie",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "cug",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    "tsengvee": {
+      "name": "tsengvee",
+      "count": 3,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "meeting",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "funny",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "test1",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        }
+      ]
+    },
+    "justn-gpt": {
+      "name": "JUJU",
+      "count": 3,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "ok",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "ju",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "gpt",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    "Derduan": {
+      "name": "DazzleJ",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "cxk",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    "qweaszq123": {
+      "name": "131129",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "chenyi",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    "Biiian": {
+      "name": "Bian",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "bb",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    "bestZwei": {
+      "name": "Zwei",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "tv",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        }
+      ]
+    },
+    "vipmc838": {
+      "name": "mc838",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "alist",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    "ifx1": {
+      "name": "ifx1",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "cc",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    "orangelightyo": {
+      "name": "神乐",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "mine",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        }
+      ]
+    }
+  },
+  "record_types": {
+    "CNAME": 19,
+    "A": 5,
+    "TXT": 1
+  },
+  "top_users": [
+    {
+      "username": "boosoyz",
+      "name": "oyz",
+      "count": 3,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "oo",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "xx",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "nezha",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        }
+      ]
+    },
+    {
+      "username": "tsengvee",
+      "name": "tsengvee",
+      "count": 3,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "meeting",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "test1",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "funny",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    {
+      "username": "justn-gpt",
+      "name": "JUJU",
+      "count": 3,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "ok",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "ju",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        },
+        {
+          "domain": "ciao.su",
+          "subdomain": "gpt",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    {
+      "username": "Neomanbeta",
+      "name": "William Wu",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "neo",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        }
+      ]
+    },
+    {
+      "username": "dsblkkk",
+      "name": "tmw",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "0-0",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    {
+      "username": "heyueshisan",
+      "name": "Marjorie",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "cug",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    {
+      "username": "Derduan",
+      "name": "DazzleJ",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "cxk",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    {
+      "username": "qweaszq123",
+      "name": "131129",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "chenyi",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    {
+      "username": "Biiian",
+      "name": "Bian",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "bb",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    {
+      "username": "bestZwei",
+      "name": "Zwei",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "tv",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        }
+      ]
+    },
+    {
+      "username": "vipmc838",
+      "name": "mc838",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "alist",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    {
+      "username": "ifx1",
+      "name": "ifx1",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "cc",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8612134
+        }
+      ]
+    },
+    {
+      "username": "orangelightyo",
+      "name": "神乐",
+      "count": 1,
+      "domains": [
+        {
+          "domain": "ciao.su",
+          "subdomain": "mine",
+          "added_time": "2025-06-15 01:26:23",
+          "timestamp": 1749950783.8622134
+        }
+      ]
+    }
+  ],
+  "recently_added": [
+    {
+      "domain": "ciao.su",
+      "subdomain": "neo",
+      "full_domain": "neo.ciao.su",
+      "owner": "William Wu",
+      "github": "Neomanbeta",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8622134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "oo",
+      "full_domain": "oo.ciao.su",
+      "owner": "oyz",
+      "github": "boosoyz",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8622134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "meeting",
+      "full_domain": "meeting.ciao.su",
+      "owner": "tsengvee",
+      "github": "tsengvee",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8622134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "ok",
+      "full_domain": "ok.ciao.su",
+      "owner": "JUJU",
+      "github": "justn-gpt",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8622134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "ju",
+      "full_domain": "ju.ciao.su",
+      "owner": "JUJU",
+      "github": "justn-gpt",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8622134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "xx",
+      "full_domain": "xx.ciao.su",
+      "owner": "oyz",
+      "github": "boosoyz",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8622134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "nezha",
+      "full_domain": "nezha.ciao.su",
+      "owner": "oyz",
+      "github": "boosoyz",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8622134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "test1",
+      "full_domain": "test1.ciao.su",
+      "owner": "tsengvee",
+      "github": "tsengvee",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8622134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "tv",
+      "full_domain": "tv.ciao.su",
+      "owner": "Zwei",
+      "github": "bestZwei",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8622134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "mine",
+      "full_domain": "mine.ciao.su",
+      "owner": "神乐",
+      "github": "orangelightyo",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8622134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "0-0",
+      "full_domain": "0-0.ciao.su",
+      "owner": "tmw",
+      "github": "dsblkkk",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8612134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "cug",
+      "full_domain": "cug.ciao.su",
+      "owner": "Marjorie",
+      "github": "heyueshisan",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8612134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "cxk",
+      "full_domain": "cxk.ciao.su",
+      "owner": "DazzleJ",
+      "github": "Derduan",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8612134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "chenyi",
+      "full_domain": "chenyi.ciao.su",
+      "owner": "131129",
+      "github": "qweaszq123",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8612134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "funny",
+      "full_domain": "funny.ciao.su",
+      "owner": "tsengvee",
+      "github": "tsengvee",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8612134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "bb",
+      "full_domain": "bb.ciao.su",
+      "owner": "Bian",
+      "github": "Biiian",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8612134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "alist",
+      "full_domain": "alist.ciao.su",
+      "owner": "mc838",
+      "github": "vipmc838",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8612134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "cc",
+      "full_domain": "cc.ciao.su",
+      "owner": "ifx1",
+      "github": "ifx1",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8612134
+    },
+    {
+      "domain": "ciao.su",
+      "subdomain": "gpt",
+      "full_domain": "gpt.ciao.su",
+      "owner": "JUJU",
+      "github": "justn-gpt",
+      "added_time": "2025-06-15 01:26:23",
+      "timestamp": 1749950783.8612134
+    }
+  ]
+}
