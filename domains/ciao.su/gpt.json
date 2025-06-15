@@ -11,6 +11,20 @@
   "content": "sokg.pages.dev",
   "ttl": 3600,
   "proxied": false
+    },
+    {
+  "type": "CNAME",
+  "name": "big",
+  "content": "sokg-6od.pages.dev",
+  "ttl": 3600,
+  "proxied": false
+    },
+    {
+  "type": "CNAME",
+  "name": "www",
+  "content": "libretv-a9l.pages.dev",
+  "ttl": 3600,
+  "proxied": false
     }
   ]
 }
