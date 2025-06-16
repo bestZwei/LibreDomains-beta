@@ -8,7 +8,7 @@
     {
       "type": "CNAME",
       "name": "@",
-      "content": "43.135.176.194",
+      "content": "1259735162.github.io",
       "ttl": 3600,
       "proxied": true
     }
