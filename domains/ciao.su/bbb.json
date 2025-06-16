@@ -1,0 +1,16 @@
+{
+  "owner": {
+    "name": "boke",
+    "github": "1259735162",
+    "email": "1259735162@qq.com"
+  },
+  "records": [
+    {
+      "type": "CNAME",
+      "name": "@",
+      "content": "1259735162.github.io",
+      "ttl": 3600,
+      "proxied": true
+    }
+  ]
+}
