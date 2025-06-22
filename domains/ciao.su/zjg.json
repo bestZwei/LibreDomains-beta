@@ -1,0 +1,17 @@
+{
+  "description": "个人博客网站",
+  "owner": {
+    "name": "david",
+    "github": "Sherlock",
+    "email": "Stevenallan15@outlook.com"
+  },
+  "records": [
+    {
+      "type": "CNAME",
+      "name": "zjg",
+      "content": "soss-1e0.pages.dev",
+      "ttl": 3600,
+      "proxied": false
+    }
+  ]
+}
