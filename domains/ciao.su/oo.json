@@ -7,7 +7,7 @@
   "records": [
     {
       "type": "CNAME",
-      "name": "@",
+      "name": "www",
       "content": "koyeb-16u.pages.dev",
       "ttl": 3600,
       "proxied": true
