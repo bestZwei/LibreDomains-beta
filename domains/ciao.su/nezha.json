@@ -6,13 +6,6 @@
   },
   "records": [
     {
-      "type": "TXT",
-      "name": "alidnscheck",
-      "content": "82e3bd43ccd94b239578effed3cbeba8",
-      "ttl": 3600,
-      "proxied": false
-    },
-    {
       "type": "CNAME",
       "name": "www",
       "content": "koyeb-16u.pages.dev",
