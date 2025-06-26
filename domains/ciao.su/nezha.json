@@ -4,6 +4,7 @@
     "github": "boosoyz",
     "email": "boosoyz@gmail.com"
   },
+  "records": [
     {
       "type": "CNAME",
       "name": "@",
